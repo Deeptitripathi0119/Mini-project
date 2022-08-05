@@ -6,15 +6,13 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
 
-const Signup = () => {
+const Addmusic = () => {
  
-  const navigate = useNavigate();
-
   const userSubmit = async (formdata) => {
     console.log(formdata);
 
 
-    const response = await fetch('http://localhost:5000/user/add', {
+    const response = await fetch('http://localhost:5000/music/add', {
       method: 'POST',
       body : JSON.stringify(formdata),
       headers : {
@@ -29,7 +27,7 @@ const Signup = () => {
         title : "Well Done👍",
         text : "You have done a wonderfull Job!!"
       });
-      navigate('/login');
+     
 
     }else{
       console.log('error occured');
@@ -50,15 +48,15 @@ const Signup = () => {
           lyrics: "",
           image: "",
           musicfile:"",
-          createdat:"",
+          createdate:"",
         }}
-        onSubmit={userSubmit} validationSchema={SignupSchema}>
+         onSubmit={userSubmit}>
         {({ values, handleChange, handleSubmit, errors }) => (
           <form onSubmit={handleSubmit}>
             <TextField 
                 value={values.title} 
                 onChange={handleChange} 
-                id="tilte" 
+                id="title" 
                 sx={{ mt: 5 }} 
                 fullWidth 
                 label="title"
@@ -100,16 +98,16 @@ const Signup = () => {
                 id="musicfile"
                 sx={{ mt: 3 }}
                 fullWidth
-                label="image"
+                label="musicfile"
                 type="file"
             /><TextField
-            value={values.image}
+            value={values.date}
             onChange={handleChange}
-            id="image"
+            id="date"
             sx={{ mt: 3 }}
             fullWidth
-            label="image"
-            type="image"
+            label="date"
+            type="date"
         />
             <Button type="submit" sx={{ mt: 5 }}>Submit</Button>
           </form>
@@ -119,4 +117,4 @@ const Signup = () => {
   )
 }
 
-export default Signup;
+export default Addmusic;
