@@ -7,34 +7,34 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Addmusic = () => {
- 
+
   const userSubmit = async (formdata) => {
     console.log(formdata);
 
 
     const response = await fetch('http://localhost:5000/music/add', {
       method: 'POST',
-      body : JSON.stringify(formdata),
-      headers : {
-        'Content-Type' : 'application/json'
+      body: JSON.stringify(formdata),
+      headers: {
+        'Content-Type': 'application/json'
       }
     })
 
-    if(response.status === 200){
+    if (response.status === 200) {
       console.log('success');
       Swal.fire({
-        icon : "success",
-        title : "Well Done👍",
-        text : "You have done a wonderfull Job!!"
+        icon: "success",
+        title: "Well Done👍",
+        text: "You have done a wonderfull Job!!"
       });
-     
 
-    }else{
+
+    } else {
       console.log('error occured');
     }
   }
 
-  
+
   return (
     <div className="container">
       <h1>Signup Here</h1>
@@ -47,68 +47,69 @@ const Addmusic = () => {
           author: "",
           lyrics: "",
           image: "",
-          musicfile:"",
-          createdate:"",
+          musicfile: "",
+          createdate: "",
+          year: "",
+          publisher:"",
         }}
-         onSubmit={userSubmit}>
+        onSubmit={userSubmit}>
         {({ values, handleChange, handleSubmit, errors }) => (
           <form onSubmit={handleSubmit}>
-            <TextField 
-                value={values.title} 
-                onChange={handleChange} 
-                id="title" 
-                sx={{ mt: 5 }} 
-                fullWidth 
-                label="title"
-                helperText={errors.title}
-                error={errors.title ? true : false}
-                />
-            <TextField 
-                value={values.description} 
-                onChange={handleChange} 
-                id="description" sx={{ mt: 5 }} 
-                fullWidth 
-                label="description" />
-            <TextField 
-                value={values.author}
-                onChange={handleChange} 
-                id="author" 
-                sx={{ mt: 3 }} 
-                fullWidth 
-                label="author" />
-            <TextField 
-                value={values.lyrics} 
-                onChange={handleChange} 
-                id="lyrics" 
-                sx={{ mt: 3 }} 
-                fullWidth 
-                label="lyrics" />
             <TextField
-                value={values.image}
-                onChange={handleChange}
-                id="image"
-                sx={{ mt: 3 }}
-                fullWidth
-                label="image"
-                type="file"
+              value={values.title}
+              onChange={handleChange}
+              id="title"
+              sx={{ mt: 5 }}
+              fullWidth
+              label="title"
+              helperText={errors.title}
+              error={errors.title ? true : false}
             />
             <TextField
-                value={values.musicfile}
-                onChange={handleChange}
-                id="musicfile"
-                sx={{ mt: 3 }}
-                fullWidth
-                label="musicfile"
-                type="file"
-            /><TextField
-            value={values.date}
-            onChange={handleChange}
-            id="date"
-            sx={{ mt: 3 }}
-            fullWidth
-            label="date"
-            type="date"
-        />
+              value={values.description}
+              onChange={handleChange}
+              id="description" sx={{ mt: 5 }}
+              fullWidth
+              label="description" />
+            <TextField
+              value={values.author}
+              onChange={handleChange}
+              id="author"
+              sx={{ mt: 3 }}
+              fullWidth
+              label="author" />
+            <TextField
+              value={values.lyrics}
+              onChange={handleChange}
+              id="lyrics"
+              sx={{ mt: 3 }}
+              fullWidth
+              label="lyrics" />
+
+            <label>Upload Image</label>
+            <input type="file" className="mb-4 form-control"  />
+            <label>Upload Music</label>
+            <input type="file" className="mb-4 form-control"  />
+            
+            <TextField
+              value={values.year}
+              onChange={handleChange}
+              id="year"
+              sx={{ mt: 3 }}
+              fullWidth
+              label="year"
+              type="year"
+            />
+             <TextField
+              value={values.publisher}
+              onChange={handleChange}
+              id="publisher"
+              sx={{ mt: 3 }}
+              fullWidth
+              label="publisher"
+              type="text"
+            />
+            
             <Button type="submit" sx={{ mt: 5 }}>Submit</Button>
           </form>
         )}

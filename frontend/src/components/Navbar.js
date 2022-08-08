@@ -39,10 +39,11 @@ const Navbar = (darkTheme, setDarkTheme) => {
                 <li class="nav-item">
                     <NavLink className="nav-link" to="/login">login</NavLink>
                 </li>
-                
                 <li class="nav-item">
-                    <NavLink className="nav-link" to="Notfound">notfound</NavLink>
+                    <NavLink className="nav-link" to="/signup">Sign up</NavLink>
                 </li>
+                
+               
             </ul>
 
         </div>

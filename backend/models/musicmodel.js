@@ -1,12 +1,16 @@
 const { Schema, model } = require('../connection');
 const schemaObject = new Schema({
-    tilte: String,
+    title: String,
     description: String,
     author:String,
     lyrics: String,
     image:String,
     musicfile:String,
-    createdat:Date,
+    createdate:Date,
+    year: Number,
+    publisher: String,
+
+
 })
 
-module.exports = model('users', schemaObject);
+module.exports = model('music', schemaObject);
