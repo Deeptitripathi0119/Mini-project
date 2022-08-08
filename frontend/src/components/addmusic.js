@@ -1,17 +1,21 @@
 import { Button, TextField } from "@mui/material"
 import { Formik } from "formik"
-import React from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
 
 const Addmusic = () => {
+  const [selThumbnail, setSelThumbnail] = useState("");
+  const [selFile, setSelFile] = useState("");
 
   const userSubmit = async (formdata) => {
+    formdata.thumbnail = selThumbnail;
+    formdata.file = selFile;
+
     console.log(formdata);
-
-
+    
     const response = await fetch('http://localhost:5000/music/add', {
       method: 'POST',
       body: JSON.stringify(formdata),
@@ -32,6 +36,37 @@ const Addmusic = () => {
     } else {
       console.log('error occured');
     }
+  }
+
+  const uploadFile = (e) => {
+    const file = e.target.files[0]
+    setSelFile(file.name)
+    const fd = new FormData()
+    fd.append("myfile", file)
+    fetch("http://localhost:5000/util/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then((res) => {
+      if (res.status === 200) {
+        console.log("uploaded")
+      }
+    })
+  }
+
+  const uploadThumbnail = (e) => {
+    const file = e.target.files[0]
+    setSelThumbnail(file.name)
+    const fd = new FormData()
+    fd.append("myfile", file)
+    fetch("http://localhost:5000/util/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then((res) => {
+      console.log(res.status)
+      if (res.status === 200) {
+        console.log("uploaded")
+      }
+    })
   }
 
 
@@ -87,9 +122,9 @@ const Addmusic = () => {
               label="lyrics" />
 
             <label>Upload Image</label>
-            <input type="file" className="mb-4 form-control"  />
+            <input type="file" className="mb-4 form-control" onChange={uploadThumbnail} />
             <label>Upload Music</label>
-            <input type="file" className="mb-4 form-control"  />
+            <input type="file" className="mb-4 form-control" onChange={uploadFile} />
             
             <TextField
               value={values.year}

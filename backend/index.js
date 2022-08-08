@@ -7,6 +7,7 @@ const app=express();
 const userRouter=require('./router/userRouter');
 const cors=require('cors');
 const musicRouter=require('./router/musicrouter');
+const utilRouter=require('./router/util');
 //middleware-a middleware can only intercept arequest to chnge its content or forward anywhere
 
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cors({origin:['http://localhost:3000']}))
 
 app.use('/user',userRouter);
 app.use('/music',musicRouter);
+app.use('/util',utilRouter);
 
 const port=5000;
 
